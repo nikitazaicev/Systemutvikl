@@ -5,7 +5,7 @@ LION(1),
 SNEK(2),
 PANDA(3),
 PIG(4),
-ELEPHANT(5),
+ELEFANT(5),
 WHALE(6);
 	
 private int verdi;		

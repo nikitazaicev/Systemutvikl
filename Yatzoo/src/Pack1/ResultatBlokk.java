@@ -15,7 +15,7 @@ public class ResultatBlokk {
 	}
 	
 	public void lagre(int rundeNr, int spillerNr, Terning[] tab) {
-		int poeng = pt.regnUtPoeng(rundeNr+1, tab);
+		int poeng = pt.regnUtPoeng(rundeNr, tab);
 		blokk[rundeNr][spillerNr]=poeng;
 	}
 	
@@ -27,6 +27,7 @@ public class ResultatBlokk {
 			}
 				poeng = poeng + " \n ";
 		}
+		
 		System.out.println(poeng);
 		
 	}
