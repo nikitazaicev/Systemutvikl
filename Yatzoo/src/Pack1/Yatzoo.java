@@ -6,11 +6,17 @@ public class Yatzoo {
 	
 	public int antallSpillere;
 	public int currentRound;
-	Scanner skanner = new Scanner(System.in);;
+	
+	public ResultatBlokk blokk;
+
+	
+	Scanner skanner = new Scanner(System.in);
 
 	public Yatzoo(int antallSpillere) {
 		this.antallSpillere = antallSpillere;
 		this.currentRound = 0;
+		
+		this.blokk = new ResultatBlokk(antallSpillere);
 	}
 
 	public Terning[] trillTerning() {
@@ -36,12 +42,21 @@ public class Yatzoo {
 	private void spillRunde(int currentRound) {
 		for(int i = 0; i<antallSpillere;i++) {
 			System.out.println("Spiller nr "+(i+1)+" klar?");
+			
 			String svar = skanner.nextLine();
-			if(!svar.equals("ja")) {
+			if(!svar.equals("ja")||!svar.equals("Ja")||!svar.equals("Ja")) {
 				System.out.println("We dont care");
 			}
-			trillTerning();
+			
+			Terning[] tab = trillTerning();
+			
+			blokk.lagre(currentRound, i, tab);//i er spillerNR			
 			skrivUtKast();
+			System.out.println("Oversikt? (ja/nei)");
+			svar = skanner.nextLine();
+			if(svar.equals("ja")) {
+				blokk.skrivUt();
+			}
 		}
 	}
 	

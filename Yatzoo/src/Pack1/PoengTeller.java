@@ -1,7 +1,7 @@
 package Pack1;
 
 public class PoengTeller {
-	public int RundePoeng(int rundeNr, Terning[] tab) {
+	public int regnUtPoeng(int rundeNr, Terning[] tab) {
 		switch(rundeNr) {
 			case 1:
 				return Runde1(tab,rundeNr);
