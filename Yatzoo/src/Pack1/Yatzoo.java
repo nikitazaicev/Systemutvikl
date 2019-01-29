@@ -7,7 +7,7 @@ public class Yatzoo {
 	public int antallSpillere;
 	public int currentRound;
 	
-	public ResultatBlokk blokk;
+	public ResultatBlokk resultBlokk;
 
 	
 	Scanner skanner = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class Yatzoo {
 		this.antallSpillere = antallSpillere;
 		this.currentRound = 0;
 		
-		this.blokk = new ResultatBlokk(antallSpillere);
+		this.resultBlokk = new ResultatBlokk(antallSpillere);
 	}
 
 	public Terning[] trillTerning() {
@@ -50,24 +50,24 @@ public class Yatzoo {
 			
 			Terning[] tab = trillTerning();
 			
-			blokk.lagre(currentRound, i, tab);//i er spillerNR			
-			skrivUtKast();
+			resultBlokk.lagre(currentRound, i, tab);//i er spillerNR			
+			skrivUtKast(tab);
 			System.out.println("Oversikt? (ja/nei)");
 			svar = skanner.nextLine();
 			if(svar.equals("ja")) {
-				blokk.skrivUt();
+				resultBlokk.skrivUt();
 			}
 		}
 	}
 	
-	public void skrivUtKast() {
-		Terning[] tab = trillTerning();
+	public void skrivUtKast(Terning[] terningTab) {
+		Terning[] tab = terningTab;
 		System.out.println("Dyr:       Verdi");
-		System.out.println(tab[0].dyr+"      "+tab[0].verdi);
-		System.out.println(tab[1].dyr+"      "+tab[1].verdi);
-		System.out.println(tab[2].dyr+"      "+tab[2].verdi);
-		System.out.println(tab[3].dyr+"      "+tab[3].verdi);
-		System.out.println(tab[4].dyr+"      "+tab[4].verdi);
+		System.out.println(tab[0].dyr+"\t"+tab[0].verdi);
+		System.out.println(tab[1].dyr+"\t"+tab[1].verdi);
+		System.out.println(tab[2].dyr+"\t"+tab[2].verdi);
+		System.out.println(tab[3].dyr+"\t"+tab[3].verdi);
+		System.out.println(tab[4].dyr+"\t"+tab[4].verdi);
 	}
 	
 

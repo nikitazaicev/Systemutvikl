@@ -62,12 +62,12 @@ public class PoengTeller {
 	}
 
 	private int Runde1(Terning[] tab, int rundeNr) {
-		
-			for(int j = 0; j < tab.length; j++) {
-				if(tab[j].verdi == rundeNr) {
-					
+			int poeng=0;
+			for(int i = 0; i < tab.length; i++) {
+				if(tab[i].verdi==(rundeNr)) {
+					poeng++;
 				}
 		}
-		return 0;
+		return poeng;
 	}
 }
