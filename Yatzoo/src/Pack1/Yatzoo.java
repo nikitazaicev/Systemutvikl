@@ -43,7 +43,7 @@ public class Yatzoo {
 			System.out.println("Spiller nr " + (i + 1) + " klar?");
 
 			String svar = skanner.nextLine();
-			if (!svar.equals("ja") || !svar.equals("Ja") || !svar.equals("Ja")) {
+			if (!svar.equals("ja") && !svar.equals("Ja") && !svar.equals("JA")) {
 				System.out.println("We dont care");
 			}
 
