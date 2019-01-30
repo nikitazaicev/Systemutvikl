@@ -99,7 +99,32 @@ class Test {
 		assertEquals(0, pt.regnUtPoeng(4, tab));
 		assertEquals(1, pt.regnUtPoeng(5, tab));
 	}
-	
+	@org.junit.jupiter.api.Test
+    void testSpillerPoeng() {
+        int[][] blokk = new int[12][5];
+        blokk[0][0] = 1;
+        blokk[0][1] = 2;
+        blokk[0][2] = 69;
+        blokk[0][3] = 4;
+        blokk[0][4] = 0;
+        blokk[1][0] = 5;
+        int[] riktig = new int[5];
+        riktig[0] = 6;
+        riktig[1] = 2;
+        riktig[2] = 69;
+        riktig[3] = 4;
+        riktig[4] = 0;
+        int[] innsett = pt.resultater(blokk, 5);
+
+        assertNotEquals(1, pt.spillerPoeng(blokk, 0));
+        assertEquals(6, pt.spillerPoeng(blokk, 0));
+        assertEquals(2, pt.spillerPoeng(blokk, 1));
+
+        for(int i = 0; i < riktig.length; i++) {
+            assertEquals(riktig[i], innsett[i]);
+        }
+
+    }
 	
 
 }

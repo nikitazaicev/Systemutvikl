@@ -49,9 +49,17 @@ public class Yatzoo {
 
 	public void start() {
 		spillSpill();
+		finale();
 		skanner.close();
 	}
 
+	private void finale() {
+		resultBlokk.skrivUtVinnere();
+	}
+
+	/**
+	 * spiller 12 runder
+	 */
 	private void spillSpill() {
 		for (currentRound = 0; currentRound < 12; currentRound++) {
 			System.out.println("Round " + (currentRound + 1) + " fight");
@@ -59,6 +67,11 @@ public class Yatzoo {
 		}
 	}
 
+	/**
+	 * spiller er runde for alle spillere iterativt
+	 * 
+	 * @param currentRound
+	 */
 	private void spillRunde(int currentRound) {
 		for (int i = 0; i < antallSpillere; i++) {
 			System.out.println("Spiller nr " + (i + 1) + " klar?");
@@ -72,7 +85,7 @@ public class Yatzoo {
 
 			skrivUtKast(tab);
 
-			tab=reRoll(tab);
+			tab = reRoll(tab);
 
 			resultBlokk.lagre(currentRound, i, tab);// i er spillerNR
 
@@ -81,10 +94,14 @@ public class Yatzoo {
 		}
 	}
 
+	/**	
+	 * @param tab tabell med 5 trillet terninger
+	 * @return tabell med 5 terninger etter at spiller har valg alt han ville ha
+	 */
 	private Terning[] reRoll(Terning[] tab) {
 		Terning[] ferdigTab = new Terning[5];
 		int antall = 0;
-		for (int i = 2; i > 0; i--) {
+		for (int i = 2; i > 0; i--) {// 2 forsøk
 
 			System.out.println("Reroll? " + i + " igjen (ja/nei)");
 			String svar = skanner.nextLine();
@@ -92,38 +109,43 @@ public class Yatzoo {
 
 				System.out.println("Hva vil du beholde? (snek/pig etc.) " + i + "rerolls igjen.");
 				svar = skanner.nextLine().toUpperCase();
-				
+
 				for (int j = 0; j < tab.length; j++) {
-					if (svar.contains(tab[j].getDyr().name())&&ferdigTab[j]==null) {
+					if (svar.contains(tab[j].getDyr().name()) && ferdigTab[j] == null) {
 						ferdigTab[j] = new Terning(tab[j].getDyr().name());
 						antall++;
 					}
 				}
-				System.out.println(antall+" terninger lagret. Neste kast: ");
-				tab = trillTerninger(5-antall);
+				System.out.println(antall + " terninger lagret. Neste kast: ");
+				if (antall == 5) { // hvis man sier han vil beholde alt etter reroll
+					return ferdigTab;
+				}
+				tab = trillTerninger(5 - antall);
 				skrivUtKast(tab);
-			} 
-			if(i==1||i==0) {
+			}
+			if (i == 1 || i == 0) {// etter 1. reroll og 2. reroll skal bare ferdigtab fylles opp med rerollene man vil beholde 
 				int ledig = 0;
-				for(Terning t : tab){
+				for (Terning t : tab) {
 					ledig = 0;
-					while(ferdigTab[ledig]!=null) {
+					while (ferdigTab[ledig] != null) {
 						ledig++;
 					}
-					ferdigTab[ledig]=t;
+					ferdigTab[ledig] = t;
 					ledig++;
 				}
-				if(!svar.equals("ja")) {
-				i = 0;
+				if (!svar.equals("ja")) {// hvis man ikke vil rerolle etter første reroll
+					i = 0;
 				}
 			}
 		}
-		
-			
+
 		skrivUtKast(ferdigTab);
 		return ferdigTab;
 	}
 
+	/**
+	 * viser resultat blokk hvis man svarer "ja"
+	 */
 	private void visResultat() {
 		System.out.println("Oversikt? (ja/nei)");
 		String svar = skanner.nextLine();
@@ -132,10 +154,15 @@ public class Yatzoo {
 		}
 	}
 
+	/**
+	 * skriver ut resultat av alle terningkast dyr og verdi
+	 * 
+	 * @param terningTab
+	 */
 	public void skrivUtKast(Terning[] terningTab) {
 		System.out.println("Dyr:   Verdi");
-		for(Terning t : terningTab) {
-		System.out.println(t.dyr + "\t" + t.verdi);
+		for (Terning t : terningTab) {
+			System.out.println(t.dyr + "\t" + t.verdi);
 		}
 	}
 

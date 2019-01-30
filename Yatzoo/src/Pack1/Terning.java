@@ -15,12 +15,19 @@ public class Terning {
 		this.dyr = Dyr.values()[verdi];
 
 	}
-
+/**
+ * lager ny terning
+ * @param animal konverterer string til enum
+ * 
+ */
 	public Terning(String animal) {
 		this.dyr = Dyr.valueOf(animal.toUpperCase());
 		this.verdi = dyr.getVerdi();
 	}
-
+/**
+ * Triller en terning
+ * @return int in range from 1 to 6
+ */
 	public Terning trill() {
 		Random rng = new Random();
 		verdi = rng.nextInt(6) + 1;

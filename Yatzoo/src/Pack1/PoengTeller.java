@@ -3,8 +3,15 @@ package Pack1;
 import PackMedInfo.Dyr;
 
 public class PoengTeller {
+	/**
+	 * Kontrollerer hvilke regler skal bruker i denne runden
+	 * 
+	 * @param tab     tabell med terninger
+	 * @param rundeNr
+	 * @return poeng
+	 */
 	public int regnUtPoeng(int rundeNr, Terning[] tab) {
-		int tall = rundeNr+1;
+		int tall = rundeNr + 1;
 		switch (tall) {
 		case 1:
 			return Runde1(tab, tall);
@@ -34,8 +41,10 @@ public class PoengTeller {
 			return 0;
 		}
 	}
+
 	/**
 	 * YATZOO
+	 * 
 	 * @param tab
 	 * @return poeng
 	 */
@@ -43,17 +52,17 @@ public class PoengTeller {
 	private int Runde12(Terning[] tab) {
 		int poeng = 0;
 		int[] count = new int[6];
-		
-		for(Terning t : tab) {
+
+		for (Terning t : tab) {
 			count[t.getVerdi() - 1]++;
 		}
-		
-		for(int i = 0; i < count.length; i++) {
-			if(count[i] == 5) {
+
+		for (int i = 0; i < count.length; i++) {
+			if (count[i] == 5) {
 				poeng = 10;
 			}
 		}
-		
+
 		return poeng;
 	}
 
@@ -194,7 +203,7 @@ public class PoengTeller {
 	}
 
 	/**
-	 * Poeng for dyr
+	 * Poeng for dyr runde 1 til 6
 	 * 
 	 * @param tab, rundeNr
 	 * @return poeng
@@ -208,5 +217,35 @@ public class PoengTeller {
 			}
 		}
 		return poeng;
+	}
+/**
+ * 
+ * @param blokk
+ * @param spillerNr
+ * @return poeng summen til en spiller
+ */
+	public int spillerPoeng(int[][] blokk, int spillerNr) {
+		int poengsum = 0;
+
+		for (int i = 0; i < 12; i++) {
+
+			poengsum = poengsum + blokk[i][spillerNr];
+
+		}
+
+		return poengsum;
+	}
+/**
+ * 
+ * @param blokk
+ * @param antSpillere
+ * @return tabell med poengsummene av alle spillere
+ */
+	public int[] resultater(int[][] blokk, int antSpillere) {
+		int[] resultat = new int[antSpillere];
+		for (int i = 0; i < antSpillere; i++) {
+			resultat[i] = spillerPoeng(blokk, i);
+		}
+		return resultat;
 	}
 }
