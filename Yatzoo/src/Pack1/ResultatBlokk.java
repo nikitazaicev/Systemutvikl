@@ -1,8 +1,5 @@
 package Pack1;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 /**
  * 
  * @author 
@@ -17,6 +14,7 @@ public class ResultatBlokk {
 		blokk = new int[12][antallSpillere];
 		pt = new PoengTeller();
 	}
+	
 	/**
 	 * regner ut poeng med regnUtPoeng metoden
 	 * @param rundeNr
@@ -35,6 +33,7 @@ public class ResultatBlokk {
 								" fikk totalt: "+tab[i]+" poeng");
 		}
 	}
+	
 	/**
 	 * skriver ut hele resultatblokken	
 	 */
@@ -50,4 +49,5 @@ public class ResultatBlokk {
 		System.out.println(poeng);
 		
 	}
+
 }

@@ -1,13 +1,11 @@
 package PeckMedTest;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Before;
 
 import Pack1.PoengTeller;
 import Pack1.Terning;
-import PackMedInfo.Dyr;
 
 class Test {
 	

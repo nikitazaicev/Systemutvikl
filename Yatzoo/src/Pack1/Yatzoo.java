@@ -2,8 +2,6 @@ package Pack1;
 
 import java.util.Scanner;
 
-import PackMedInfo.Dyr;
-
 public class Yatzoo {
 
 	public int antallSpillere;
@@ -74,7 +72,7 @@ public class Yatzoo {
 	 */
 	private void spillRunde(int currentRound) {
 		for (int i = 0; i < antallSpillere; i++) {
-			System.out.println("Spiller nr " + (i + 1) + " klar? (Round:"+(currentRound+1)+")");
+			System.out.println("Spiller nr " + (i + 1) + " klar? (Round:" + (currentRound + 1) + ")");
 
 			String svar = skanner.nextLine();
 			if (!svar.equals("ja") && !svar.equals("Ja") && !svar.equals("JA")) {
@@ -94,7 +92,7 @@ public class Yatzoo {
 		}
 	}
 
-	/**	
+	/**
 	 * @param tab tabell med 5 trillet terninger
 	 * @return tabell med 5 terninger etter at spiller har valg alt han ville ha
 	 */
@@ -120,9 +118,9 @@ public class Yatzoo {
 				if (antall == 5) { // hvis man sier han vil beholde alt etter reroll (dumt men kan skje)
 					return ferdigTab;
 				}
-				tab = trillTerninger(5 - antall);//triller resten (de som var ikke valgt )
+				tab = trillTerninger(5 - antall);// triller resten (de som var ikke valgt )
 				skrivUtKast(tab);
-			}else{// svarer nei avslutter loopen
+			} else {// svarer nei avslutter loopen
 				i = 0;
 			}
 		}
@@ -133,7 +131,7 @@ public class Yatzoo {
 		skrivUtKast(ferdigTab);
 		return ferdigTab;
 	}
-	
+
 	/**
 	 * viser resultat blokk hvis man svarer "ja"
 	 */

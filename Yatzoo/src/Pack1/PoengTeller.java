@@ -1,7 +1,5 @@
 package Pack1;
 
-import PackMedInfo.Dyr;
-
 public class PoengTeller {
 	/**
 	 * Kontrollerer hvilke regler skal bruker i denne runden
