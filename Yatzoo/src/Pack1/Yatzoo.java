@@ -93,7 +93,7 @@ public class Yatzoo {
 				svar = skanner.nextLine().toUpperCase();
 				int antall = 0;
 				for (int j = 0; j < tab.length; j++) {
-					if (svar.contains(tab[j].getDyr().name())&&ferdigTab[j]!=null) {
+					if (svar.contains(tab[j].getDyr().name())&&ferdigTab[j]==null) {
 						ferdigTab[j] = new Terning(svar);
 						antall++;
 					}

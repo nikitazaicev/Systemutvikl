@@ -4,76 +4,208 @@ import PackMedInfo.Dyr;
 
 public class PoengTeller {
 	public int regnUtPoeng(int rundeNr, Terning[] tab) {
-		int runde = rundeNr+1;
-		switch(runde) {
-			case 1:
-				return Runde1(tab,runde);
-			case 2:
-				return Runde1(tab,runde);
-			case 3:
-				return Runde1(tab,runde);
-			case 4:
-				return Runde1(tab,runde);
-			case 5:
-				return Runde1(tab,runde);
-			case 6:
-				return Runde1(tab,runde);
-			case 7:
-				return Runde7(tab);
-			case 8:
-				return Runde8(tab);
-			case 9:
-				return Runde9(tab);
-			case 10:
-				return Runde10(tab);
-			case 11:
-				return Runde11(tab);
-			case 12:
-				return Runde12(tab);
-			default: return 0;
+		int tall = rundeNr+1;
+		switch (tall) {
+		case 1:
+			return Runde1(tab, tall);
+		case 2:
+			return Runde1(tab, tall);
+		case 3:
+			return Runde1(tab, tall);
+		case 4:
+			return Runde1(tab, tall);
+		case 5:
+			return Runde1(tab, tall);
+		case 6:
+			return Runde1(tab, tall);
+		case 7:
+			return Runde7(tab);
+		case 8:
+			return Runde8(tab);
+		case 9:
+			return Runde9(tab);
+		case 10:
+			return Runde10(tab);
+		case 11:
+			return Runde11(tab);
+		case 12:
+			return Runde12(tab);
+		default:
+			return 0;
 		}
 	}
+	/**
+	 * YATZOO
+	 * @param tab
+	 * @return poeng
+	 */
 
 	private int Runde12(Terning[] tab) {
-		// TODO Auto-generated method stub
-		return 0;
+		int poeng = 0;
+		int[] count = new int[6];
+		
+		for(Terning t : tab) {
+			count[t.getVerdi() - 1]++;
+		}
+		
+		for(int i = 0; i < count.length; i++) {
+			if(count[i] == 5) {
+				poeng = 10;
+			}
+		}
+		
+		return poeng;
 	}
+
+	/**
+	 * 4 ULIKE
+	 * 
+	 * @param tab
+	 * @return poeng
+	 */
 
 	private int Runde11(Terning[] tab) {
-		// TODO Auto-generated method stub
-		return 0;
+		int[] count = new int[6];
+		int poeng = 5;
+
+		for (Terning t : tab) {
+			count[t.getVerdi() - 1]++;
+		}
+
+		for (int i = 0; i < count.length; i++) {
+			if (count[i] > 1) {
+				poeng = 0;
+			}
+		}
+
+		return poeng;
 	}
 
+	/**
+	 * HUS ELLER 2 + 3 LIKE
+	 * 
+	 * @param tab
+	 * @return poeng
+	 */
 	private int Runde10(Terning[] tab) {
-		// TODO Auto-generated method stub
-		return 0;
+		int poeng = 0;
+		int par = 0;
+		int treLike = 0;
+		int[] count = new int[6];
+
+		for (Terning t : tab) {
+			count[t.getVerdi() - 1]++;
+		}
+
+		for (int i = 0; i < count.length; i++) {
+			if (count[i] == 2) {
+				par++;
+			} else if (count[i] == 3) {
+				treLike++;
+			}
+		}
+
+		if (par == 1 && treLike == 1) {
+			poeng = 5;
+		}
+
+		return poeng;
 	}
+
+	/**
+	 * 2 PAR
+	 * 
+	 * @param tab
+	 * @return poeng
+	 */
 
 	private int Runde9(Terning[] tab) {
 		int[] count = new int[6];
-		Dyr[] dyr = Dyr.values();
-		for(Terning t : tab) {
-			count[t.getVerdi()]++;
+		int par = 0;
+		int poeng = 0;
+
+		for (Terning t : tab) {
+			count[t.getVerdi() - 1]++;
 		}
-		return 0;
+		for (int i = 0; i < count.length; i++) {
+			if (count[i] >= 2) {
+				par++;
+			}
+			if (count[i] >= 4) {
+				par = 2;
+			}
+		}
+		if (par >= 2) {
+			poeng = 4;
+		}
+		return poeng;
 	}
+
+	/**
+	 * 4 LIKE
+	 * 
+	 * @param tab
+	 * @return poeng
+	 */
 
 	private int Runde8(Terning[] tab) {
-		// TODO Auto-generated method stub
-		return 0;
+		int poeng = 0;
+		int test = 0;
+		for (int j = 0; j < tab.length; j++) {
+			for (int i = 0; i < tab.length; i++) {
+				if (tab[i].verdi == j + 1) {
+					test++;
+				}
+				if (test >= 4) {
+					poeng = 4;
+					i = tab.length;
+					j = tab.length;
+				}
+			}
+			test = 0;
+		}
+		return poeng;
 	}
+
+	/**
+	 * 3 LIKE
+	 * 
+	 * @param tab
+	 * @return poeng
+	 */
 
 	private int Runde7(Terning[] tab) {
-		// TODO Auto-generated method stub
-		return 0;
+		int poeng = 0;
+		int test = 0;
+		for (int j = 0; j < tab.length; j++) {
+			for (int i = 0; i < tab.length; i++) {
+				if (tab[i].verdi == j + 1) {
+					test++;
+				}
+				if (test >= 3) {
+					poeng = 3;
+					i = tab.length;
+					j = tab.length;
+				}
+			}
+			test = 0;
+		}
+		return poeng;
 	}
 
+	/**
+	 * Poeng for dyr
+	 * 
+	 * @param tab, rundeNr
+	 * @return poeng
+	 */
+
 	private int Runde1(Terning[] tab, int rundeNr) {
-			int poeng=0;
-			for(int i = 0; i < tab.length; i++) {
-				if(tab[i].verdi==(rundeNr)) {
-					poeng++;
-				}
+		int poeng = 0;
+		for (int i = 0; i < tab.length; i++) {
+			if (tab[i].verdi == (rundeNr)) {
+				poeng++;
+			}
 		}
 		return poeng;
 	}
