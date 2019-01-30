@@ -2,6 +2,8 @@ package Pack1;
 
 import java.util.Scanner;
 
+import PackMedInfo.Dyr;
+
 public class Yatzoo {
 
 	public int antallSpillere;
@@ -17,8 +19,23 @@ public class Yatzoo {
 
 		this.resultBlokk = new ResultatBlokk(antallSpillere);
 	}
+	/**
+	 *  @param antall terninger 
+	 *  @return tebell med terning objekter
+	 */
+	public Terning[] trillTerninger(int antall) {
+		Terning[] resultTabT = new Terning[antall];
+		for (int i = 0; i < resultTabT.length; i++) {
+			resultTabT[i] = new Terning().trill();
+		}
 
-	public Terning[] trillTerning() {
+		return resultTabT;
+	}
+	/**
+	 *  default triller 5 terninger
+	 *   @return tebell med terning objekter
+	 */
+	public Terning[] trillTerninger() {
 		Terning[] resultTabT = new Terning[5];
 		for (int i = 0; i < resultTabT.length; i++) {
 			resultTabT[i] = new Terning().trill();
@@ -47,13 +64,13 @@ public class Yatzoo {
 				System.out.println("We dont care");
 			}
 
-			Terning[] tab = trillTerning();
+			Terning[] tab = trillTerninger();
 
+			skrivUtKast(tab);
+			
 			reRoll(tab);
 
 			resultBlokk.lagre(currentRound, i, tab);// i er spillerNR
-
-			skrivUtKast(tab);
 
 			visResultat();
 
@@ -61,19 +78,24 @@ public class Yatzoo {
 	}
 
 	private Terning[] reRoll(Terning[] tab) {
-		Terning[] ferdigTab = new Terning[0];
-
+		Terning[] ferdigTab = new Terning[5];
+		Terning[] terningDraft = new Terning[0];
+		Dyr[] dyr = Dyr.values();
 		for (int i = 2; i > 0; i--) {
 
 			System.out.println("Reroll? " + i + " igjen (ja/nei)");
 			String svar = skanner.nextLine();
 			if (svar.equals("ja")) {
 			
-				tab = trillTerning();
+				tab = trillTerninger();
 			
-				System.out.println("Hva vil du beholde? " + i + " igjen (ja/nei)");
-				svar = skanner.nextLine();
+				System.out.println("Hva vil du beholde? " + i + "rerolls igjen igjen (snek/pig etc.)");
+				svar = skanner.nextLine().toUpperCase();
+				ferdigTab[0]=new Terning(svar);
+				System.out.println("holder "+ferdigTab[0].toString());
 				
+			}else {
+				i=0;
 			}
 		}
 		return ferdigTab;

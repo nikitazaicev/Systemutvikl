@@ -15,7 +15,15 @@ public class Terning {
 		this.dyr = Dyr.values()[verdi];
 
 	}
+	public Terning(String animal) {
+		this.dyr = Dyr.valueOf(animal.toUpperCase());
+		this.verdi = dyr.getVerdi();
+	}
 	
+	@Override
+	public String toString() {
+		return "Terning [verdi=" + verdi + ", dyr=" + dyr + "]";
+	}
 	public Terning trill() {
 		Random rng = new Random();
 		verdi = rng.nextInt(6)+1;
