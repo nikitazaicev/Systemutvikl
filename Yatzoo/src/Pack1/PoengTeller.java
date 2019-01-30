@@ -1,5 +1,7 @@
 package Pack1;
 
+import PackMedInfo.Dyr;
+
 public class PoengTeller {
 	public int regnUtPoeng(int rundeNr, Terning[] tab) {
 		int runde = rundeNr+1;
@@ -48,7 +50,11 @@ public class PoengTeller {
 	}
 
 	private int Runde9(Terning[] tab) {
-		// TODO Auto-generated method stub
+		int[] count = new int[6];
+		Dyr[] dyr = Dyr.values();
+		for(Terning t : tab) {
+			count[t.getVerdi()]++;
+		}
 		return 0;
 	}
 

@@ -19,9 +19,10 @@ public class Yatzoo {
 
 		this.resultBlokk = new ResultatBlokk(antallSpillere);
 	}
+
 	/**
-	 *  @param antall terninger 
-	 *  @return tebell med terning objekter
+	 * @param antall terninger
+	 * @return tebell med terning objekter
 	 */
 	public Terning[] trillTerninger(int antall) {
 		Terning[] resultTabT = new Terning[antall];
@@ -31,9 +32,11 @@ public class Yatzoo {
 
 		return resultTabT;
 	}
+
 	/**
-	 *  default triller 5 terninger
-	 *   @return tebell med terning objekter
+	 * default triller 5 terninger
+	 * 
+	 * @return tebell med terning objekter
 	 */
 	public Terning[] trillTerninger() {
 		Terning[] resultTabT = new Terning[5];
@@ -67,8 +70,8 @@ public class Yatzoo {
 			Terning[] tab = trillTerninger();
 
 			skrivUtKast(tab);
-			
-			reRoll(tab);
+
+			tab=reRoll(tab);
 
 			resultBlokk.lagre(currentRound, i, tab);// i er spillerNR
 
@@ -79,25 +82,39 @@ public class Yatzoo {
 
 	private Terning[] reRoll(Terning[] tab) {
 		Terning[] ferdigTab = new Terning[5];
-		Terning[] terningDraft = new Terning[0];
-		Dyr[] dyr = Dyr.values();
+		
 		for (int i = 2; i > 0; i--) {
 
 			System.out.println("Reroll? " + i + " igjen (ja/nei)");
 			String svar = skanner.nextLine();
 			if (svar.equals("ja")) {
-			
-				tab = trillTerninger();
-			
-				System.out.println("Hva vil du beholde? " + i + "rerolls igjen igjen (snek/pig etc.)");
+
+				System.out.println("Hva vil du beholde? (snek/pig etc.) " + i + "rerolls igjen.");
 				svar = skanner.nextLine().toUpperCase();
-				ferdigTab[0]=new Terning(svar);
-				System.out.println("holder "+ferdigTab[0].toString());
-				
-			}else {
-				i=0;
+				int antall = 0;
+				for (int j = 0; j < tab.length; j++) {
+					if (svar.contains(tab[j].getDyr().name())&&ferdigTab[j]!=null) {
+						ferdigTab[j] = new Terning(svar);
+						antall++;
+					}
+				}
+				System.out.println(antall);
+				tab = trillTerninger(5-antall);
+				skrivUtKast(tab);
+			} else {
+				int ledig = 0;
+				for(Terning t : tab){
+					ledig = 0;
+					while(ferdigTab[ledig]!=null) {
+						ledig++;
+					}
+					ferdigTab[ledig]=t;
+					ledig++;
+				}
+				i = 0;
 			}
 		}
+		skrivUtKast(ferdigTab);
 		return ferdigTab;
 	}
 
@@ -110,13 +127,10 @@ public class Yatzoo {
 	}
 
 	public void skrivUtKast(Terning[] terningTab) {
-		Terning[] tab = terningTab;
 		System.out.println("Dyr:   Verdi");
-		System.out.println(tab[0].dyr + "\t" + tab[0].verdi);
-		System.out.println(tab[1].dyr + "\t" + tab[1].verdi);
-		System.out.println(tab[2].dyr + "\t" + tab[2].verdi);
-		System.out.println(tab[3].dyr + "\t" + tab[3].verdi);
-		System.out.println(tab[4].dyr + "\t" + tab[4].verdi);
+		for(Terning t : terningTab) {
+		System.out.println(t.dyr + "\t" + t.verdi);
+		}
 	}
 
 	public int getAntallSpillere() {
