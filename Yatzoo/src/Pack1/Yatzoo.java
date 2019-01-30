@@ -98,6 +98,7 @@ public class Yatzoo {
 	 * @param tab tabell med 5 trillet terninger
 	 * @return tabell med 5 terninger etter at spiller har valg alt han ville ha
 	 */
+
 	private Terning[] reRoll(Terning[] tab) {
 		Terning[] ferdigTab = new Terning[5];
 		int antall = 0;
@@ -110,39 +111,29 @@ public class Yatzoo {
 				System.out.println("Hva vil du beholde? (snek/pig etc.) " + i + "rerolls igjen.");
 				svar = skanner.nextLine().toUpperCase();
 
-				for (int j = 0; j < tab.length; j++) {
-					if (svar.contains(tab[j].getDyr().name()) && ferdigTab[j] == null) {
-						ferdigTab[j] = new Terning(tab[j].getDyr().name());
+				for (int j = 0; j < tab.length; j++) { // legger inn i ferdigTab oppgitte terninger
+					if (svar.contains(tab[j].getDyr().name())) {
+						ferdigTab[antall] = new Terning(tab[j].getDyr().name());
 						antall++;
 					}
 				}
 				System.out.println(antall + " terninger lagret. Neste kast: ");
-				if (antall == 5) { // hvis man sier han vil beholde alt etter reroll
+				if (antall == 5) { // hvis man sier han vil beholde alt etter reroll (dumt men kan skje)
 					return ferdigTab;
 				}
-				tab = trillTerninger(5 - antall);
+				tab = trillTerninger(5 - antall);//triller resten (de som var ikke valgt )
 				skrivUtKast(tab);
-			}
-			if (i == 1 || i == 0) {// etter 1. reroll og 2. reroll skal bare ferdigtab fylles opp med rerollene man vil beholde 
-				int ledig = 0;
-				for (Terning t : tab) {
-					ledig = 0;
-					while (ferdigTab[ledig] != null) {
-						ledig++;
-					}
-					ferdigTab[ledig] = t;
-					ledig++;
-				}
-				if (!svar.equals("ja")) {// hvis man ikke vil rerolle etter første reroll
-					i = 0;
-				}
+			}else{// svarer nei avslutter loopen
+				i = 0;
 			}
 		}
-
+		for (Terning t : tab) { // fyller opp resten av ferdigTab med de siste kastene
+			ferdigTab[antall] = t;
+			antall++;
+		}
 		skrivUtKast(ferdigTab);
 		return ferdigTab;
 	}
-
 	/**
 	 * viser resultat blokk hvis man svarer "ja"
 	 */
