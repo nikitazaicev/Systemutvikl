@@ -74,7 +74,7 @@ public class Yatzoo {
 	 */
 	private void spillRunde(int currentRound) {
 		for (int i = 0; i < antallSpillere; i++) {
-			System.out.println("Spiller nr " + (i + 1) + " klar?");
+			System.out.println("Spiller nr " + (i + 1) + " klar? (Round:"+(currentRound+1)+")");
 
 			String svar = skanner.nextLine();
 			if (!svar.equals("ja") && !svar.equals("Ja") && !svar.equals("JA")) {
@@ -98,7 +98,6 @@ public class Yatzoo {
 	 * @param tab tabell med 5 trillet terninger
 	 * @return tabell med 5 terninger etter at spiller har valg alt han ville ha
 	 */
-
 	private Terning[] reRoll(Terning[] tab) {
 		Terning[] ferdigTab = new Terning[5];
 		int antall = 0;
@@ -134,6 +133,7 @@ public class Yatzoo {
 		skrivUtKast(ferdigTab);
 		return ferdigTab;
 	}
+	
 	/**
 	 * viser resultat blokk hvis man svarer "ja"
 	 */
