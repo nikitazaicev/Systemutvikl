@@ -49,6 +49,7 @@ public class Yatzoo {
 
 	public void start() {
 		spillSpill();
+		skanner.close();
 	}
 
 	private void spillSpill() {
@@ -82,7 +83,7 @@ public class Yatzoo {
 
 	private Terning[] reRoll(Terning[] tab) {
 		Terning[] ferdigTab = new Terning[5];
-		
+		int antall = 0;
 		for (int i = 2; i > 0; i--) {
 
 			System.out.println("Reroll? " + i + " igjen (ja/nei)");
@@ -91,17 +92,18 @@ public class Yatzoo {
 
 				System.out.println("Hva vil du beholde? (snek/pig etc.) " + i + "rerolls igjen.");
 				svar = skanner.nextLine().toUpperCase();
-				int antall = 0;
+				
 				for (int j = 0; j < tab.length; j++) {
 					if (svar.contains(tab[j].getDyr().name())&&ferdigTab[j]==null) {
-						ferdigTab[j] = new Terning(svar);
+						ferdigTab[j] = new Terning(tab[j].getDyr().name());
 						antall++;
 					}
 				}
-				System.out.println(antall);
+				System.out.println(antall+" terninger lagret. Neste kast: ");
 				tab = trillTerninger(5-antall);
 				skrivUtKast(tab);
-			} else {
+			} 
+			if(i==1||i==0) {
 				int ledig = 0;
 				for(Terning t : tab){
 					ledig = 0;
@@ -111,9 +113,13 @@ public class Yatzoo {
 					ferdigTab[ledig]=t;
 					ledig++;
 				}
+				if(!svar.equals("ja")) {
 				i = 0;
+				}
 			}
 		}
+		
+			
 		skrivUtKast(ferdigTab);
 		return ferdigTab;
 	}

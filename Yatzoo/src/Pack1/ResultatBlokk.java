@@ -20,7 +20,7 @@ public class ResultatBlokk {
 	}
 	
 	public void skrivUt() { 
-		String poeng = "";
+		String poeng = " ";
 		for(int i = 0; i<blokk.length;i++) {
 			for(int j = 0; j<blokk[i].length;j++) {
 				poeng = poeng+ " " + blokk[i][j];
@@ -31,5 +31,29 @@ public class ResultatBlokk {
 		System.out.println(poeng);
 		
 	}
+
+	public int spillerPoeng(int antallSpillere, int spillerNr) {
+        int poengsum = 0;
+
+        for (int i = 0; i < 12; i++) {
+
+            poengsum = poengsum + blokk[i][spillerNr];
+
+        }
+
+        return poengsum;
+    }
+
+    public int[] resultater(int antSpillere) {
+        int[] resultat = new int[antSpillere];
+        for (int i = 0; i < antSpillere; i++) {
+            resultat[i] = spillerPoeng(antSpillere, i);
+        }
+        for (int j = 0; j < resultat.length; j++) {
+            System.out.println("spiller " + (j + 1) + ": " + resultat[j]);
+        }
+        return resultat;
+    }
+
 
 }
